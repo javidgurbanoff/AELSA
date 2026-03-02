@@ -25,11 +25,12 @@ function FAQs() {
   const faqs = [
     {
       question: "What is Aelsa Technologies?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      answer: "",
     },
     {
       question: "What is our mission?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      answer:
+        "AELSA Technologies was founded as a young, multidisciplinary team aiming to develop innovative and sustainable solutions in the field of unmanned systems. Within the scope of the Teknofest Unmanned Surface Vessel Competition, our team aims to develop a task-oriented, reliable, adaptable to environmental conditions, and highly autonomous Unmanned Surface Vessel (USV). Our goal is not just to compete; it is to create systems applicable to real-world problems.",
     },
     {
       question: "What have we done in the current year?",

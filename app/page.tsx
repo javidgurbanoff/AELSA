@@ -1,23 +1,24 @@
 "use client";
 
 import Navbar from "@/components/navbar";
-//import Footer from "@/app/features/footer/footer";//
+import Footer from "./features/Footer/Footer";
 import Hero from "@/components/Hero";
-import { BentoGrid } from "@/components/ui/bento-grid";
+import NewsRoom from "@/components/NewsRoom";
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <Navbar />
-      <section className="">
+
+      <section>
         <Hero />
       </section>
-      <section className="">
-        <BentoGrid>
-          <div />
-        </BentoGrid>
+
+      <section>
+        <NewsRoom />
       </section>
-      {/* Footer */}?{" "}
+
+      <Footer />
     </main>
   );
 }

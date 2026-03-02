@@ -4,6 +4,7 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import Backmenu from "@/components/backmenu";
 
 export default function Login() {
@@ -76,12 +77,20 @@ export default function Login() {
             Create Account
           </Button>
         </div>
-
-        <div className="mt-4 flex justify-between">
+        <div className="mt-6 space-y-4">
           <Alert>
             <AlertTitle>Need help?</AlertTitle>
             <AlertDescription>Contact support for assistance.</AlertDescription>
           </Alert>
+
+          <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+            Already have an account?{" "}
+            <Link href="/login" className="text-[#0B1F3A] hover:underline">
+              <span className="text-indigo-600 hover:underline cursor-pointer">
+                Login
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
