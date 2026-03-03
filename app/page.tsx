@@ -2,6 +2,8 @@
 
 import Navbar from "@/components/navbar";
 import Footer from "./features/Footer/Footer";
+import Partner from "@/components/partner";
+import InteractiveContent from "@/components/InteractiveContent";
 import Hero from "@/components/Hero";
 import NewsRoom from "@/components/NewsRoom";
 
@@ -15,7 +17,15 @@ export default function Home() {
       </section>
 
       <section>
+        <InteractiveContent />
+      </section>
+
+      <section>
         <NewsRoom />
+      </section>
+
+      <section>
+        <Partner />
       </section>
 
       <Footer />

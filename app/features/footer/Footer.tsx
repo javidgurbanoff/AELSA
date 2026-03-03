@@ -31,7 +31,7 @@ const Footer = () => {
 
   return (
     <footer className=" text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 border-t-1">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -83,7 +83,7 @@ const Footer = () => {
               ))}
             </div>
             <div className="text-sm text-gray-400">
-              <p>© {new Date().getFullYear()} TechCorp. All rights reserved.</p>
+              <p>© {new Date().getFullYear()} Aelsa. All rights reserved.</p>
               <div className="flex space-x-4 mt-2">
                 <a
                   href="#"
