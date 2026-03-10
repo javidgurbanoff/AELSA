@@ -20,7 +20,7 @@ const InteractiveContent = () => {
 
   return (
     <section className="py-20 flex justify-center">
-      <div className="text-center space-y-6 max-w-3xl">
+      <div className="text-center space-y-6 max-w-3xl ">
         <h2 className="text-4xl font-bold text-[#38BDF8]">
           Interactive Sea Technology
         </h2>

@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/navbar";
+import StatisticsCard from "@/components/StatisticsCard";
 import { ArrowUpRight, Activity, Cpu, Globe, Shield } from "lucide-react";
 
 const stats = [
@@ -83,6 +84,7 @@ export default function Statistics() {
             ))}
           </div>
         </section>
+        <StatisticsCard />
       </div>
     </div>
   );
