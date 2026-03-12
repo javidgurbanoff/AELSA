@@ -42,7 +42,7 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <Link href="/register">
+            <Link href="/auth/register">
               <InteractiveHoverButton>Try For Free</InteractiveHoverButton>
             </Link>
           </nav>

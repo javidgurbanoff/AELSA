@@ -37,7 +37,7 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              href="/register"
+              href="/auth/register"
               className="px-8 py-3 rounded-full bg-[#38BDF8] hover:bg-[#5ED0FA] text-[#0A2540] font-semibold transition"
             >
               Get Started

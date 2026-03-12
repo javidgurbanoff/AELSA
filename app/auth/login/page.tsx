@@ -58,7 +58,7 @@ export default function Login() {
           Welcome Back
         </h1>
         <p className="text-sm text-gray-500 text-center mb-8">
-          Sign in to continue to <span className="font-semibold">AzPayGo</span>
+          Sign in to continue to <span className="font-semibold">AELSA</span>
         </p>
 
         <form onSubmit={handleLoginSubmit} className="space-y-4">
@@ -78,7 +78,10 @@ export default function Login() {
           />
 
           <div className="flex justify-between items-center text-sm">
-            <Link href="/account" className="text-[#0B1F3A] hover:underline">
+            <Link
+              href="/auth/forgot-password"
+              className="text-[#0B1F3A] hover:underline"
+            >
               Forgot password?
             </Link>
             <Link
