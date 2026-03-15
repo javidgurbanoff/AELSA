@@ -5,16 +5,16 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import SearchRatio from "./SearchRadio";
 import { InteractiveHoverButton } from "./interactive-hover-button";
-
+import DashBoard from "@/components/ui/Dashboard";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
     { href: "/about", label: "ABOUT US" },
+    { href: "/news", label: "NEWS" },
     { href: "/what-we-do", label: "WHAT WE DO" },
     { href: "/statistics", label: "STATISTICS" },
-    { href: "/contact", label: "CONTACT" },
   ];
 
   return (
@@ -26,7 +26,6 @@ export default function Navbar() {
               AELSA
             </div>
           </Link>
-
           <section className="shrink-0 hidden md:block">
             <SearchRatio />
           </section>
@@ -41,7 +40,7 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
-
+            <DashBoard />
             <Link href="/auth/register">
               <InteractiveHoverButton>Try For Free</InteractiveHoverButton>
             </Link>
