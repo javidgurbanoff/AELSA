@@ -17,7 +17,7 @@ const Footer = () => {
     },
     {
       title: "Support",
-      links: ["Help Center", "Contact Us", "FAQ", "Community"],
+      links: ["Help Center", "Contact Us", "FAQ", "Community", "Tutorial"],
     },
   ];
 

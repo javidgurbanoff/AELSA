@@ -42,7 +42,6 @@ export default function Statistics() {
       <Navbar />
 
       <div className="pt-28 px-6">
-        {/* ===== STATISTICS SECTION ===== */}
         <section className="max-w-7xl mx-auto">
           <div className="mb-16 text-center">
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#38BDF8]">
@@ -90,10 +89,8 @@ export default function Statistics() {
           </div>
         </section>
 
-        {/* Divider */}
         <div className="my-24 border-t border-slate-200"></div>
 
-        {/* ===== HIGHLIGHT SECTION ===== */}
         <section className="flex flex-col items-center justify-center gap-8 text-center">
           <p className="text-xl max-w-2xl leading-relaxed">
             The{" "}

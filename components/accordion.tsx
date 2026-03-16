@@ -39,19 +39,19 @@ function FAQs() {
   ];
 
   return (
-    <div className="bg-gray-200 py-10 px-5 ">
+    <div className="bg-[#0A2540] py-10 px-5 ">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-center mb-8 text-5xl font-semibold">
+        <h1 className="text-center text-white mb-8 text-5xl font-semibold">
           Frequently Asked Questions
         </h1>
-        <p className="text-lg text-center mb-14 font-light">
+        <p className="text-lg text-center text-white mb-14 font-light">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
         {faqs.map((faq, index) => (
           <Accordion key={index} question={faq.question} answer={faq.answer} />
         ))}
-        <div className="text-center mt-12 text-lg font-light">
+        <div className="text-center text-white mt-12 text-lg font-light">
           Haven't got your answer?
           <a
             href="/contact"
