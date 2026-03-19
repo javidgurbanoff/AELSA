@@ -11,25 +11,20 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-
       <section>
         <Hero />
       </section>
-
       <section>
         <InteractiveContent />
       </section>
       <section>
         <Accordion />
       </section>
+      <section></section>
       <section>
         <NewsRoom />
-      </section>
-
-      <section>
         <Partner />
       </section>
-
       <Footer />
     </main>
   );

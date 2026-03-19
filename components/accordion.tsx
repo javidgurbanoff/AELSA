@@ -10,11 +10,11 @@ function Accordion({ question, answer }) {
   return (
     <article className="flex flex-col gap-4 bg-white rounded-xl border border-gray-200 px-5 py-7 mb-4">
       <button
-        className="flex justify-between items-center text-xl font-semibold"
+        className="flex justify-between items-center text-xl font-semibold "
         onClick={toggleAccordion}
       >
         <h2>{question}</h2>
-        <span className="w-6 h-6">{isOpen ? "▼" : "▲"} </span>
+        <span className="w-6 h-6 cursor-pointer">{isOpen ? "▼" : "▲"} </span>
       </button>
       {isOpen && <p className="text-lg leading-7 font-thin">{answer}</p>}
     </article>
@@ -25,7 +25,8 @@ function FAQs() {
   const faqs = [
     {
       question: "What is Aelsa Technologies?",
-      answer: "",
+      answer:
+        "AELSA Technologies combines both new & modern technologies and sea world together. With the help of new devices and tools we can create a new era swiftly and more accessible ",
     },
     {
       question: "What is our mission?",

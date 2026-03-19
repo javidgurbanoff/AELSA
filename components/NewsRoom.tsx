@@ -14,7 +14,7 @@ const photos = [
   {
     img: "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
     date: "16 Jun, 2026",
-    text: "Still? Waiting for the agreements?",
+    text: "Still? Waiting for the agreements? Just join us now!",
   },
   {
     img: "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/02/SeaTech_Master_Shot01-lighthouse-480x360.webp?media=1726085813",
