@@ -22,7 +22,7 @@ export default function InteractiveContent() {
     <section className="py-24 px-6 flex justify-center bg-[#F5F9FC]">
       <div className="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
-          <p className="text-sm font-semibold text-purple-600 uppercase tracking-widest">
+          <p className="text-sm font-semibold text-[#0A2540] uppercase tracking-widest">
             Interactive Sea Technology
           </p>
 
@@ -38,22 +38,22 @@ export default function InteractiveContent() {
 
           <ul className="space-y-3 text-gray-700">
             <li className="flex items-center gap-3">
-              <span className="text-purple-600 font-bold">✓</span>
+              <span className="text-[#0A2540] font-bold">✓</span>
               Easy-to-use ocean monitoring tools
             </li>
 
             <li className="flex items-center gap-3">
-              <span className="text-purple-600 font-bold">✓</span>
+              <span className="text-[#0A2540] font-bold">✓</span>
               50+ interactive marine data modules
             </li>
 
             <li className="flex items-center gap-3">
-              <span className="text-purple-600 font-bold">✓</span>
+              <span className="text-[#0A2540] font-bold">✓</span>
               Advanced visualization for sea analytics
             </li>
           </ul>
 
-          <button className="mt-4 px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition">
+          <button className="mt-4 px-6 cursor-pointer py-3 border border-[#0A2540] rounded-full hover:bg-[#0A2540] hover:text-white transition">
             Explore sea technology
           </button>
         </div>
