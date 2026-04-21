@@ -1,6 +1,6 @@
 "use client";
-
 import FAQs from "@/components/accordion";
+import Colleagues_Info from "@/components/Colleagues_Info";
 import Backmenu from "@/components/backmenu";
 
 export default function About() {
@@ -56,6 +56,9 @@ export default function About() {
         </div>
       </section>
       <FAQs />
+      <section>
+        <Colleagues_Info />
+      </section>
     </div>
   );
 }

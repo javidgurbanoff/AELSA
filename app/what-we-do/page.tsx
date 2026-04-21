@@ -88,21 +88,21 @@ export default function OurMission() {
       <Navbar />
 
       <div className="pt-24 my-6 mx-6">
-        <h2 className="text-[#fff] text-[30px] pl-1.5 px-2.5 my-2">Articles</h2>
+        <h2 className="text-[#fff] text-[40px]  pl-3 my-2">Articles</h2>
         <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8 ">
           {articles.map((article) => (
             <div
               key={article.id}
-              className="bg-[#0A2540] rounded-xl overflow-hidden shadow-lg"
+              className="bg-[#0A2540] rounded-xl overflow-hidden cursor-pointer shadow-lg"
             >
-              <img src={article.image} className="w-full h-48 object-cover" />
+              <img src={article.image} className="w-full object-cover" />
 
               <div className="p-4">
                 <p className="text-sm text-gray-400">
                   {article.date} • {article.readTime}
                 </p>
 
-                <h2 className="text-xl font-bold text-white mt-2">
+                <h2 className="text-[19px] font-bold text-white mt-2">
                   {article.title}
                 </h2>
 
@@ -120,6 +120,11 @@ export default function OurMission() {
               </div>
             </div>
           ))}
+        </div>
+        <div className=" flex justify-center">
+          <button className="px-8 py-3 mt-4 rounded-full border cursor-pointer border-white/25 hover:bg-white/10 text-white transition">
+            More
+          </button>
         </div>
       </div>
     </div>

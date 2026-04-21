@@ -26,18 +26,21 @@ const photos = [
 const NewsRoom = () => {
   return (
     <div className="text-center m-auto">
-      <div className="text-white text-4xl font-sans">
+      <div className="text-[#0B1F3A] text-4xl font-sans">
         Newsroom
         <div className="flex gap-8 justify-center flex-wrap mt-8">
           {photos.map((photo, index) => (
-            <div key={index} className="flex flex-col items-center">
+            <div
+              key={index}
+              className="flex flex-col items-center text-[#0A2540]"
+            >
               <img
                 src={photo.img}
                 alt={`News ${index}`}
                 className="rounded-lg w-72 h-48 object-cover cursor-pointer"
               />
-              <span className="text-sm text-gray-300 mt-3">{photo.date}</span>
-              <span className="text-sm text-white mt-0.5">{photo.text}</span>
+              <span className="text-sm  mt-3">{photo.date}</span>
+              <span className="text-sm  mt-0.5">{photo.text}</span>
             </div>
           ))}
         </div>

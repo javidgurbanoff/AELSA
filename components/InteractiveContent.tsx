@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 const images = [
   "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Runner-up-480x360.jpg?media=1726085813",
@@ -53,9 +54,11 @@ export default function InteractiveContent() {
             </li>
           </ul>
 
-          <button className="mt-4 px-6 cursor-pointer py-3 border border-[#0A2540] rounded-full hover:bg-[#0A2540] hover:text-white transition">
-            Explore sea technology
-          </button>
+          <Link href="/what-we-do">
+            <button className="mt-4 px-6 cursor-pointer py-3 border border-[#0A2540] rounded-full hover:bg-[#0A2540] hover:text-white transition">
+              Explore sea technology
+            </button>
+          </Link>
         </div>
 
         <div className="relative flex flex-col items-center">

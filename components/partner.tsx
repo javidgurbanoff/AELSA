@@ -3,6 +3,9 @@ import React from "react";
 const Partner = () => {
   return (
     <div className="text-center max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <h2 className="text-[48px] text-[#0B1F3A]">
+        Some of Our Accomplishments
+      </h2>
       <div className=" mt-8">
         <span className=" text-white text-3xl font-sans">
           Recognized for innovation in SeaTech
