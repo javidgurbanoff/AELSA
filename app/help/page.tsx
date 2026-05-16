@@ -47,7 +47,7 @@ const InputField = ({
   </div>
 );
 
-export default function ContactPage() {
+export default function HelpPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",

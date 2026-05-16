@@ -20,78 +20,155 @@ export default function InteractiveContent() {
   };
 
   return (
-    <section className="py-24 px-6 flex justify-center bg-[#F5F9FC]">
-      <div className="max-w-7xl w-full grid md:grid-cols-2 gap-12 items-center">
+    <section className="py-24 px-6 flex justify-center bg-transparent relative">
+      {/* subtle ambient layer (NOT a full background) */}
+      <div className="absolute inset-0 opacity-60">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/5 blur-[140px]" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
+        {/* LEFT */}
         <div className="space-y-6">
-          <p className="text-sm font-semibold text-[#0A2540] uppercase tracking-widest">
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted">
             Interactive Sea Technology
           </p>
 
-          <h2 className="text-5xl font-bold text-[#0B1F3A] leading-tight">
+          <h2 className="text-5xl font-black text-text leading-tight">
             One click and it's interactive
           </h2>
 
-          <p className="text-lg text-gray-600 max-w-lg">
+          <p className="text-lg text-muted max-w-lg">
             Whether you're developing marine monitoring systems, designing ocean
             data platforms, or preparing research tools, AELSA Sea Technology
             helps you create interactive and engaging solutions.
           </p>
 
-          <ul className="space-y-3 text-gray-700">
+          <ul className="space-y-3 text-muted">
             <li className="flex items-center gap-3">
-              <span className="text-[#0A2540] font-bold">✓</span>
+              <span className="text-primary font-bold">✓</span>
               Easy-to-use ocean monitoring tools
             </li>
 
             <li className="flex items-center gap-3">
-              <span className="text-[#0A2540] font-bold">✓</span>
+              <span className="text-primary font-bold">✓</span>
               50+ interactive marine data modules
             </li>
 
             <li className="flex items-center gap-3">
-              <span className="text-[#0A2540] font-bold">✓</span>
+              <span className="text-primary font-bold">✓</span>
               Advanced visualization for sea analytics
             </li>
           </ul>
 
           <Link href="/what-we-do">
-            <button className="mt-4 px-6 cursor-pointer py-3 border border-[#0A2540] rounded-full hover:bg-[#0A2540] hover:text-white transition">
+            <button
+              className="
+              mt-4
+              px-6
+              py-3
+              rounded-full
+
+              border
+              border-white/10
+
+              bg-surface/60
+              text-text
+
+              backdrop-blur-xl
+
+              transition-all
+              hover:bg-surface
+              hover:text-primary
+            "
+            >
               Explore sea technology
             </button>
           </Link>
         </div>
 
+        {/* RIGHT */}
         <div className="relative flex flex-col items-center">
           <div className="relative w-[420px]">
-            <img
-              src={images[current]}
-              alt="Sea Technology"
-              className="rounded-2xl shadow-xl w-full object-cover"
-            />
+            {/* glass frame */}
+            <div
+              className="
+              rounded-2xl
+              border
+              border-white/10
+              bg-surface/40
+              backdrop-blur-2xl
+              p-2
+            "
+            >
+              <img
+                src={images[current]}
+                alt="Sea Technology"
+                className="rounded-xl w-full object-cover"
+              />
+            </div>
 
+            {/* controls */}
             <button
               onClick={prevSlide}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center"
+              className="
+                absolute
+                left-2
+                top-1/2
+                -translate-y-1/2
+
+                w-10 h-10
+                rounded-full
+
+                bg-surface/80
+                text-text
+
+                border
+                border-white/10
+
+                backdrop-blur-xl
+
+                hover:text-primary
+              "
             >
               ‹
             </button>
 
             <button
               onClick={nextSlide}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center"
+              className="
+                absolute
+                right-2
+                top-1/2
+                -translate-y-1/2
+
+                w-10 h-10
+                rounded-full
+
+                bg-surface/80
+                text-text
+
+                border
+                border-white/10
+
+                backdrop-blur-xl
+
+                hover:text-primary
+              "
             >
               ›
             </button>
           </div>
 
+          {/* dots */}
           <div className="flex gap-3 mt-6">
             {images.map((_, index) => (
               <div
                 key={index}
                 onClick={() => setCurrent(index)}
-                className={`w-3 h-3 rounded-full cursor-pointer ${
-                  index === current ? "bg-gray-800" : "bg-gray-300"
-                }`}
+                className={`
+                  w-2.5 h-2.5 rounded-full cursor-pointer transition
+                  ${index === current ? "bg-primary" : "bg-white/20"}
+                `}
               />
             ))}
           </div>

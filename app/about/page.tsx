@@ -1,13 +1,11 @@
 "use client";
 import FAQs from "@/components/accordion";
 import Colleagues_Info from "@/components/Colleagues_Info";
-import Backmenu from "@/components/backmenu";
-
+import Navbar from "@/components/navbar";
 export default function About() {
   return (
     <div className="bg-[#F5F9FC]">
-      <Backmenu />
-
+      <Navbar />
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold mb-6 text-[#0A2540]">

@@ -4,59 +4,101 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section
-      className="
-        relative
-        w-full
-        min-h-screen
-        pt-16
-        flex
-        items-center
-        bg-gradient-to-b
-        from-[#0A2540]
-        to-[#0A2540]
-        overflow-hidden
-      "
-    >
-      {/* Soft marine glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)]" />
+    <section className="relative min-h-screen overflow-hidden bg-background pt-24">
+      {/* Ambient Glow */}
+      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/10 blur-[140px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
-        {/* LEFT CONTENT */}
-        <div className="text-white">
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
+      {/* Grid Overlay */}
+      <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:80px_80px]" />
+
+      <div className="relative z-10 mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-20 px-6 lg:grid-cols-2">
+        {/* LEFT SIDE */}
+        <div className="max-w-2xl">
+          {/* Small Label */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface/80 px-4 py-2 backdrop-blur-xl">
+            <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-sm font-medium tracking-wide text-muted">
+              Next Generation Marine Intelligence
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-5xl font-black leading-[1.05] tracking-tight text-text md:text-7xl">
             Intelligent
-            <span className="block text-[#38BDF8]">Sea Technology</span>
-            Built for Tomorrow
+            <span className="block text-primary">Sea Technology</span>
+            for the Modern Ocean
           </h1>
 
-          <p className="mt-6 text-lg text-slate-300 max-w-xl">
-            AELSA delivers next-generation marine intelligence, real-time ocean
-            analytics, and AI-driven solutions for modern maritime systems.
+          {/* Description */}
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
+            AELSA delivers advanced maritime analytics, autonomous monitoring,
+            and AI-powered ocean systems engineered for modern marine
+            operations.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          {/* CTA */}
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
               href="/auth/register"
-              className="px-8 py-3 rounded-full bg-[#38BDF8] hover:bg-[#5ED0FA] text-[#0A2540] font-semibold transition"
+              className="rounded-full bg-primary px-8 py-4 font-semibold text-background transition-all duration-300 hover:brightness-110 hover:shadow-[0_0_40px_rgba(14,165,233,0.35)]"
             >
               Get Started
             </Link>
 
             <Link
               href="/what-we-do"
-              className="px-8 py-3 rounded-full border border-white/25 hover:bg-white/10 text-white transition"
+              className="rounded-full border border-white/10 bg-surface/60 px-8 py-4 text-text backdrop-blur-xl transition-all duration-300 hover:bg-surface"
             >
-              Learn More
+              Explore Platform
             </Link>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-16 flex flex-wrap gap-10">
+            <div>
+              <h3 className="text-3xl font-bold text-text">24/7</h3>
+              <p className="mt-2 text-sm tracking-wide text-muted">
+                Real-Time Monitoring
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-3xl font-bold text-text">98%</h3>
+              <p className="mt-2 text-sm tracking-wide text-muted">
+                Prediction Accuracy
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-3xl font-bold text-text">AI</h3>
+              <p className="mt-2 text-sm tracking-wide text-muted">
+                Ocean Intelligence
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT VISUAL */}
-        <div className="hidden md:flex justify-center">
-          <div className="relative w-[420px] h-[420px]">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#38BDF8]/25 to-transparent blur-3xl" />
-            <div className="absolute inset-14 rounded-full border border-white/10 backdrop-blur-md" />
+        {/* RIGHT SIDE */}
+        <div className="relative hidden h-[650px] items-center justify-center lg:flex">
+          {/* Outer Orb */}
+          <div className="absolute h-[520px] w-[520px] rounded-full border border-white/10 bg-surface/40 backdrop-blur-3xl" />
+
+          {/* Middle Orb */}
+          <div className="absolute h-[380px] w-[380px] rounded-full border border-primary/20 bg-primary/5 backdrop-blur-2xl" />
+
+          {/* Inner Orb */}
+          <div className="absolute h-[220px] w-[220px] rounded-full bg-gradient-to-br from-primary/40 to-accent/20 blur-2xl" />
+
+          {/* Floating Card */}
+          <div className="absolute left-0 top-24 rounded-2xl border border-white/10 bg-surface/70 p-5 backdrop-blur-2xl shadow-2xl">
+            <p className="text-sm text-muted">Ocean Status</p>
+            <h3 className="mt-2 text-2xl font-bold text-text">Stable</h3>
+          </div>
+
+          {/* Floating Card */}
+          <div className="absolute bottom-24 right-0 rounded-2xl border border-white/10 bg-surface/70 p-5 backdrop-blur-2xl shadow-2xl">
+            <p className="text-sm text-muted">AI Forecast</p>
+            <h3 className="mt-2 text-2xl font-bold text-primary">Active</h3>
           </div>
         </div>
       </div>

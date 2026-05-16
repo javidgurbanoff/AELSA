@@ -1,22 +1,92 @@
+"use client";
+
 import * as React from "react";
 
-function Accordion({ question, answer }) {
+function Accordion({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <article className="flex flex-col gap-4 bg-white rounded-xl border border-gray-200 px-5 py-7 mb-4">
+    <article
+      className="
+        group
+        mb-5
+        overflow-hidden
+        rounded-3xl
+        bg-white/80
+        backdrop-blur-xl
+        shadow-[0_10px_40px_rgba(14,165,233,0.08)]
+        transition-all
+        duration-300
+        hover:shadow-[0_10px_50px_rgba(20,184,166,0.12)]
+      "
+    >
       <button
-        className="flex justify-between items-center text-xl font-semibold "
-        onClick={toggleAccordion}
+        onClick={() => setIsOpen(!isOpen)}
+        className="
+          flex
+          w-full
+          items-center
+          justify-between
+          px-7
+          py-6
+          text-left
+        "
       >
-        <h2>{question}</h2>
-        <span className="w-6 h-6 cursor-pointer">{isOpen ? "▼" : "▲"} </span>
+        <h2
+          className="
+            text-lg
+            md:text-xl
+            font-semibold
+            tracking-tight
+            text-[#071120]
+          "
+        >
+          {question}
+        </h2>
+
+        <div
+          className={`
+            flex
+            h-10
+            w-10
+            items-center
+            justify-center
+            rounded-full
+            bg-[#F1F5F9]
+            text-[#0EA5E9]
+            transition-all
+            duration-300
+            ${isOpen ? "rotate-180 bg-[#0EA5E9] text-white" : ""}
+          `}
+        >
+          ▼
+        </div>
       </button>
-      {isOpen && <p className="text-lg leading-7 font-thin">{answer}</p>}
+
+      <div
+        className={`
+          grid
+          transition-all
+          duration-300
+          ${
+            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }
+        `}
+      >
+        <div className="overflow-hidden">
+          <p
+            className="
+              px-7
+              pb-7
+              text-[15px]
+              leading-8
+              text-[#475569]
+            "
+          >
+            {answer}
+          </p>
+        </div>
+      </div>
     </article>
   );
 }
@@ -24,45 +94,110 @@ function Accordion({ question, answer }) {
 function FAQs() {
   const faqs = [
     {
-      question: "What is Aelsa Technologies?",
+      question: "What is AELSA Technologies?",
       answer:
-        "AELSA Technologies combines both new & modern technologies and sea world together. With the help of new devices and tools we can create a new era swiftly and more accessible ",
+        "AELSA Technologies combines modern engineering with marine innovation. We build intelligent systems, autonomous solutions, and advanced sea technologies designed for the future.",
     },
     {
       question: "What is our mission?",
       answer:
-        "AELSA Technologies was founded as a young, multidisciplinary team aiming to develop innovative and sustainable solutions in the field of unmanned systems. Within the scope of the Teknofest Unmanned Surface Vessel Competition, our team aims to develop a task-oriented, reliable, adaptable to environmental conditions, and highly autonomous Unmanned Surface Vessel (USV). Our goal is not just to compete; it is to create systems applicable to real-world problems.",
+        "Our mission is to develop sustainable, reliable, and highly autonomous maritime systems capable of solving real-world challenges through modern AI and unmanned technologies.",
     },
     {
-      question: "What have we done in the current year?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      question: "What have we done this year?",
+      answer:
+        "This year, our team focused on autonomous marine systems, real-time analytics, and scalable engineering solutions for next-generation sea technology projects.",
     },
   ];
 
   return (
-    <div className="bg-[#0A2540] py-10 px-5 ">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-center text-white mb-8 text-5xl font-semibold">
-          Frequently Asked Questions
-        </h1>
-        <p className="text-lg text-center text-white mb-14 font-light">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        {faqs.map((faq, index) => (
-          <Accordion key={index} question={faq.question} answer={faq.answer} />
-        ))}
-        <div className="text-center text-white mt-12 text-lg font-light">
-          Haven't got your answer?
+    <section
+      className="
+        relative
+        overflow-hidden
+        bg-[#F8FBFF]
+        py-24
+        px-6
+      "
+    >
+      {/* soft glow */}
+      <div className="absolute top-0 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#0EA5E9]/10 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-4xl">
+        <div className="mb-16 text-center">
+          <p
+            className="
+              mb-4
+              text-sm
+              font-semibold
+              uppercase
+              tracking-[0.3em]
+              text-[#14B8A6]
+            "
+          >
+            SUPPORT
+          </p>
+
+          <h1
+            className="
+              text-4xl
+              md:text-5xl
+              font-extrabold
+              tracking-tight
+              text-[#071120]
+            "
+          >
+            Frequently Asked Questions
+          </h1>
+
+          <p
+            className="
+              mx-auto
+              mt-6
+              max-w-2xl
+              text-lg
+              leading-8
+              text-[#64748B]
+            "
+          >
+            Everything you need to know about AELSA Technologies, our marine
+            innovation systems, and the future of intelligent sea solutions.
+          </p>
+        </div>
+
+        <div>
+          {faqs.map((faq, index) => (
+            <Accordion
+              key={index}
+              question={faq.question}
+              answer={faq.answer}
+            />
+          ))}
+        </div>
+
+        <div className="mt-14 text-center">
+          <p className="text-[#64748B] text-lg">Still have questions?</p>
+
           <a
             href="/contact"
-            className="hover:text-blue-700 ml-2 text-[#0FB9B1] font-light"
+            className="
+              mt-3
+              inline-flex
+              items-center
+              gap-2
+              text-[#0EA5E9]
+              font-semibold
+              transition-all
+              duration-300
+              hover:text-[#14B8A6]
+            "
           >
-            Contact our support now
+            Contact our support
+            <span>→</span>
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

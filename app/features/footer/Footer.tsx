@@ -10,7 +10,10 @@ import {
 
 const Footer = () => {
   const quickLinks = [
-    { title: "About Us", links: ["Company", "Team", "Career", "Blog"] },
+    {
+      title: "About Us",
+      links: ["Company", "Team", "Career", "Blog", "Destinations"],
+    },
     {
       title: "Services",
       links: ["Web Design", "Development", "Marketing", "Consulting"],

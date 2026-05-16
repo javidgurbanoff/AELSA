@@ -47,64 +47,134 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0B1F3A] relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+      {/* Ambient Glow (matches Hero) */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#ffffff22] rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-[-120px] right-[-120px] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[160px]" />
       </div>
 
-      <div className="relative z-10 bg-white rounded-2xl shadow-2xl w-[400px] p-8">
-        <h1 className="text-3xl font-bold text-center text-[#0B1F3A] mb-6">
+      {/* Login Card */}
+      <div
+        className="
+          relative z-10
+          w-[420px]
+          rounded-2xl
+
+          border
+          border-white/10
+
+          bg-surface/70
+          backdrop-blur-2xl
+
+          shadow-[0_20px_80px_rgba(14,165,233,0.12)]
+
+          p-8
+        "
+      >
+        <h1 className="text-3xl font-black text-text text-center">
           Welcome Back
         </h1>
-        <p className="text-sm text-gray-500 text-center mb-8">
-          Sign in to continue to <span className="font-semibold">AELSA</span>
+
+        <p className="text-sm text-muted text-center mt-3">
+          Sign in to continue to{" "}
+          <span className="text-primary font-semibold">AELSA</span>
         </p>
 
-        <form onSubmit={handleLoginSubmit} className="space-y-4">
+        <form onSubmit={handleLoginSubmit} className="space-y-4 mt-8">
+          {/* EMAIL */}
           <input
             placeholder="Enter your email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full text-sm h-12 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0B1F3A] outline-none"
+            className="
+              w-full
+              h-12
+              px-4
+              rounded-lg
+
+              bg-background/40
+              text-text
+
+              border
+              border-white/10
+
+              outline-none
+              focus:border-primary/40
+              focus:ring-2
+              focus:ring-primary/10
+            "
           />
+
+          {/* PASSWORD */}
           <input
             placeholder="Enter your password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full text-sm h-12 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#0B1F3A] outline-none"
+            className="
+              w-full
+              h-12
+              px-4
+              rounded-lg
+
+              bg-background/40
+              text-text
+
+              border
+              border-white/10
+
+              outline-none
+              focus:border-primary/40
+              focus:ring-2
+              focus:ring-primary/10
+            "
           />
 
-          <div className="flex justify-between items-center text-sm">
+          {/* LINKS */}
+          <div className="flex justify-between items-center text-sm mt-2">
             <Link
               href="/auth/forgot-password"
-              className="text-[#0B1F3A] hover:underline"
+              className="text-muted hover:text-text transition"
             >
               Forgot password?
             </Link>
+
             <Link
               href="/auth/register"
-              className="text-[#0B1F3A] hover:underline"
+              className="text-muted hover:text-primary transition"
             >
               Register
             </Link>
           </div>
 
+          {/* BUTTON */}
           <button
             type="submit"
             disabled={pending}
-            className={`w-full h-12 cursor-pointer rounded-lg text-white font-semibold transition-all flex items-center justify-center gap-2 ${
-              pending
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#0B1F3A] hover:bg-[#12325C]"
-            }`}
+            className={`
+              w-full
+              h-12
+              rounded-lg
+              font-semibold
+              transition-all
+              flex
+              items-center
+              justify-center
+              gap-2
+
+              ${
+                pending
+                  ? "bg-muted/30 text-muted cursor-not-allowed"
+                  : "bg-primary text-background hover:brightness-110 hover:shadow-[0_0_40px_rgba(14,165,233,0.35)]"
+              }
+            `}
           >
             {pending ? (
               <>
                 <span>Logging in...</span>
-                <span className="loader border-2 border-t-transparent border-white w-5 h-5 rounded-full animate-spin"></span>
+                <span className="w-5 h-5 border-2 border-background/30 border-t-transparent rounded-full animate-spin" />
               </>
             ) : (
               "Login"
@@ -112,10 +182,11 @@ export default function Login() {
           </button>
         </form>
 
+        {/* MESSAGE */}
         {message && (
           <p
             className={`mt-4 text-center text-sm ${
-              message.includes("successful") ? "text-green-600" : "text-red-600"
+              message.includes("successful") ? "text-accent" : "text-red-400"
             }`}
           >
             {message}
