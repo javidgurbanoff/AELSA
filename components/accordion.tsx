@@ -8,160 +8,103 @@ function Accordion({ question, answer }: { question: string; answer: string }) {
   return (
     <article
       className="
-        group
-        mb-5
-        overflow-hidden
-        rounded-3xl
-        bg-white/80
-        backdrop-blur-xl
-        shadow-[0_10px_40px_rgba(14,165,233,0.08)]
-        transition-all
-        duration-300
-        hover:shadow-[0_10px_50px_rgba(20,184,166,0.12)]
+        mb-4 overflow-hidden rounded-2xl
+        border border-white/10
+        bg-surface/40 backdrop-blur-xl
+        transition-all duration-300
+        hover:border-primary/20
       "
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="
-          flex
-          w-full
-          items-center
-          justify-between
-          px-7
-          py-6
-          text-left
-        "
+        aria-expanded={isOpen}
+        className="flex w-full items-center justify-between px-7 py-6 text-left"
       >
-        <h2
-          className="
-            text-lg
-            md:text-xl
-            font-semibold
-            tracking-tight
-            text-[#071120]
-          "
-        >
+        <h2 className="text-lg md:text-xl font-semibold tracking-tight text-text pr-4">
           {question}
         </h2>
 
         <div
           className={`
-            flex
-            h-10
-            w-10
-            items-center
-            justify-center
-            rounded-full
-            bg-[#F1F5F9]
-            text-[#0EA5E9]
-            transition-all
-            duration-300
-            ${isOpen ? "rotate-180 bg-[#0EA5E9] text-white" : ""}
+            flex-shrink-0 flex h-9 w-9 items-center justify-center rounded-full
+            border border-white/10 transition-all duration-300
+            ${
+              isOpen
+                ? "rotate-180 bg-primary/20 border-primary/30 text-primary"
+                : "bg-surface/60 text-text/50"
+            }
           `}
         >
-          ▼
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path
+              d="M2 4l4 4 4-4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
       </button>
 
       <div
         className={`
-          grid
-          transition-all
-          duration-300
-          ${
-            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }
+          grid transition-all duration-300
+          ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
         `}
       >
         <div className="overflow-hidden">
-          <p
-            className="
-              px-7
-              pb-7
-              text-[15px]
-              leading-8
-              text-[#475569]
-            "
-          >
-            {answer}
-          </p>
+          <p className="px-7 pb-7 text-[15px] leading-8 text-muted">{answer}</p>
         </div>
       </div>
     </article>
   );
 }
 
+const faqs = [
+  {
+    question: "What is AELSA Technologies?",
+    answer:
+      "AELSA Technologies combines modern engineering with marine innovation. We build intelligent systems, autonomous solutions, and advanced sea technologies designed for the future of ocean monitoring.",
+  },
+  {
+    question: "What is our mission?",
+    answer:
+      "Our mission is to develop sustainable, reliable, and highly autonomous maritime systems capable of solving real-world challenges through modern AI and unmanned technologies.",
+  },
+  {
+    question: "What have we achieved so far?",
+    answer:
+      "We deployed 12 autonomous surface units across the North Sea, reached 98% AI forecast accuracy in open-water trials, and maintained 99.98% system uptime across all active deployments over the past 12 months.",
+  },
+  {
+    question: "Which oceans and regions do you operate in?",
+    answer:
+      "AELSA systems are active across 78 countries, covering the North Sea, Arctic shelf, Pacific corridors, and major coastal monitoring zones used by our partner organizations.",
+  },
+  {
+    question: "How can I work with or partner with AELSA?",
+    answer:
+      "We work with maritime operators, research institutions, and government agencies. Reach out via our contact page and our partnerships team will respond within 2 business days.",
+  },
+];
+
 function FAQs() {
-  const faqs = [
-    {
-      question: "What is AELSA Technologies?",
-      answer:
-        "AELSA Technologies combines modern engineering with marine innovation. We build intelligent systems, autonomous solutions, and advanced sea technologies designed for the future.",
-    },
-    {
-      question: "What is our mission?",
-      answer:
-        "Our mission is to develop sustainable, reliable, and highly autonomous maritime systems capable of solving real-world challenges through modern AI and unmanned technologies.",
-    },
-    {
-      question: "What have we done this year?",
-      answer:
-        "This year, our team focused on autonomous marine systems, real-time analytics, and scalable engineering solutions for next-generation sea technology projects.",
-    },
-  ];
-
   return (
-    <section
-      className="
-        relative
-        overflow-hidden
-        bg-[#F8FBFF]
-        py-24
-        px-6
-      "
-    >
-      {/* soft glow */}
-      <div className="absolute top-0 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#0EA5E9]/10 blur-3xl" />
+    <section className="relative overflow-hidden bg-background py-24 px-6">
+      <div className="absolute top-0 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-4xl">
-        <div className="mb-16 text-center">
-          <p
-            className="
-              mb-4
-              text-sm
-              font-semibold
-              uppercase
-              tracking-[0.3em]
-              text-[#14B8A6]
-            "
-          >
-            SUPPORT
+      <div className="relative z-10 mx-auto max-w-3xl">
+        <div className="mb-14 text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+            Support
           </p>
-
-          <h1
-            className="
-              text-4xl
-              md:text-5xl
-              font-extrabold
-              tracking-tight
-              text-[#071120]
-            "
-          >
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-text">
             Frequently Asked Questions
-          </h1>
-
-          <p
-            className="
-              mx-auto
-              mt-6
-              max-w-2xl
-              text-lg
-              leading-8
-              text-[#64748B]
-            "
-          >
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-muted">
             Everything you need to know about AELSA Technologies, our marine
-            innovation systems, and the future of intelligent sea solutions.
+            systems, and the future of intelligent sea solutions.
           </p>
         </div>
 
@@ -176,25 +119,10 @@ function FAQs() {
         </div>
 
         <div className="mt-14 text-center">
-          <p className="text-[#64748B] text-lg">Still have questions?</p>
-
-          <a
-            href="/contact"
-            className="
-              mt-3
-              inline-flex
-              items-center
-              gap-2
-              text-[#0EA5E9]
-              font-semibold
-              transition-all
-              duration-300
-              hover:text-[#14B8A6]
-            "
-          >
-            Contact our support
-            <span>→</span>
-          </a>
+          <p className="text-muted text-base">Still have questions?</p>
+          href="/contact" className="mt-2 inline-flex items-center gap-2
+          text-primary font-semibold hover:opacity-70 transition-opacity
+          duration-200" Contact our team <span>{"→"}</span>
         </div>
       </div>
     </section>

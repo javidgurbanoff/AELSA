@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import type React from "react";
 import { useInView } from "motion/react";
 import { annotate } from "rough-notation";
-import { type RoughAnnotation } from "rough-notation/lib/model";
+import type { RoughAnnotation } from "rough-notation/lib/model";
 
 type AnnotationAction =
   | "highlight"
@@ -41,51 +41,37 @@ export function Highlighter({
   const elementRef = useRef<HTMLSpanElement>(null);
   const annotationRef = useRef<RoughAnnotation | null>(null);
 
-  const isInView = useInView(elementRef, {
-    once: true,
-    margin: "-10%",
-  });
-
-  // If isView is false, always show. If isView is true, wait for inView
+  const isInView = useInView(elementRef, { once: true, margin: "-10%" });
   const shouldShow = !isView || isInView;
 
   useEffect(() => {
     const element = elementRef.current;
-    let resizeObserver: ResizeObserver | null = null;
+    if (!shouldShow || !element) return;
 
-    if (shouldShow && element) {
-      const annotationConfig = {
-        type: action,
-        color,
-        strokeWidth,
-        animationDuration,
-        iterations,
-        padding,
-        multiline,
-      };
+    const annotation = annotate(element, {
+      type: action,
+      color,
+      strokeWidth,
+      animationDuration,
+      iterations,
+      padding,
+      multiline,
+    });
 
-      const annotation = annotate(element, annotationConfig);
+    annotationRef.current = annotation;
+    annotation.show();
 
-      annotationRef.current = annotation;
+    const resizeObserver = new ResizeObserver(() => {
+      annotation.hide();
       annotation.show();
-
-      resizeObserver = new ResizeObserver(() => {
-        annotation.hide();
-        annotation.show();
-      });
-
-      resizeObserver.observe(element);
-      resizeObserver.observe(document.body);
-    }
+    });
+    resizeObserver.observe(element);
+    resizeObserver.observe(document.body);
 
     return () => {
-      if (annotationRef.current) {
-        annotationRef.current.remove();
-        annotationRef.current = null;
-      }
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
+      annotationRef.current?.remove();
+      annotationRef.current = null;
+      resizeObserver.disconnect();
     };
   }, [
     shouldShow,

@@ -5,76 +5,116 @@ import Navbar from "@/components/navbar";
 import SimpleDialogDemo from "@/components/ui/dialog";
 import LogOutButton from "@/components/ui/LogOutButton";
 
+const SettingRow = ({
+  title,
+  description,
+  action,
+  border = true,
+}: {
+  title: string;
+  description: string;
+  action: React.ReactNode;
+  border?: boolean;
+}) => (
+  <div
+    className={`flex items-center justify-between gap-6 py-6 ${
+      border ? "border-b border-white/10" : ""
+    }`}
+  >
+    <div>
+      <p className="text-base font-semibold text-text">{title}</p>
+      <p className="text-sm text-muted mt-0.5">{description}</p>
+    </div>
+    <div className="flex-shrink-0">{action}</div>
+  </div>
+);
+
 export default function Account() {
   return (
-    <div className="flex flex-col  min-h-screen bg-[#F5F9FC]">
+    <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
 
-      <main className="pt-28 flex justify-center">
-        {" "}
-        <div className="max-w-3xl mx-auto">
-          {/* Page title */}
-          <h1 className="text-3xl font-bold text-[#0B1F3A] mb-8">
-            Account Settings
-          </h1>
+      <main className="pt-28 pb-20 px-6">
+        <div className="max-w-2xl mx-auto">
+          {/* Header */}
+          <div className="mb-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-3">
+              Account
+            </p>
+            <h1 className="text-4xl font-black text-text">Account Settings</h1>
+            <p className="mt-2 text-muted">
+              Manage your email, password, and account preferences.
+            </p>
+          </div>
 
-          {/* Settings Card */}
-          <section className="bg-white shadow-lg rounded-2xl p-8 space-y-6">
-            {/* Email */}
-            <div className="flex items-center justify-between border-b pb-6">
-              <div>
-                <p className="text-lg font-semibold text-[#0B1F3A]">
-                  Email Address
-                </p>
-                <p className="text-sm text-gray-500">
-                  Update the email connected to your account
-                </p>
-              </div>
+          {/* Settings card */}
+          <section
+            className="
+              rounded-2xl
+              border border-white/10
+              bg-surface/40 backdrop-blur-xl
+              px-8 py-2
+            "
+          >
+            <SettingRow
+              title="Email Address"
+              description="Update the email connected to your account"
+              action={<SimpleDialogDemo />}
+            />
 
-              <SimpleDialogDemo />
-            </div>
+            <SettingRow
+              title="Password"
+              description="Change your account password"
+              action={
+                <button
+                  className="
+                    px-4 py-2 text-sm font-medium cursor-pointer
+                    rounded-lg border border-white/10
+                    bg-surface/60 text-text
+                    hover:border-primary/30 hover:text-primary
+                    transition-all duration-200
+                  "
+                >
+                  Change
+                </button>
+              }
+            />
 
-            {/* Password */}
-            <div className="flex items-center justify-between border-b pb-6">
-              <div>
-                <p className="text-lg font-semibold text-[#0B1F3A]">Password</p>
-                <p className="text-sm text-gray-500">
-                  Change your account password
-                </p>
-              </div>
+            <SettingRow
+              title="Logout"
+              description="Sign out from your account"
+              action={<LogOutButton />}
+            />
 
-              <button className="px-4 py-2 cursor-pointer text-sm font-medium text-white bg-[#0B1F3A] rounded-lg hover:bg-[#12325C] transition">
-                Change
-              </button>
-            </div>
-
-            {/* Logout */}
-            <div className="flex items-center justify-between border-b pb-6">
-              <div>
-                <p className="text-lg font-semibold text-[#0B1F3A]">Logout</p>
-                <p className="text-sm text-gray-500">
-                  Sign out from your account
-                </p>
-              </div>
-
-              <LogOutButton />
-            </div>
-
-            {/* Danger Zone */}
-            <div className="pt-4">
-              <h3 className="text-lg font-semibold text-red-600 mb-2">
+            {/* Danger zone */}
+            <div className="py-6">
+              <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-4">
                 Danger Zone
-              </h3>
-
-              <div className="flex items-center justify-between bg-red-50 border border-red-200 rounded-xl p-4">
+              </p>
+              <div
+                className="
+                  flex items-center justify-between gap-6
+                  rounded-xl p-5
+                  border border-red-500/20
+                  bg-red-500/5
+                "
+              >
                 <div>
-                  <p className="font-medium text-red-700">Delete Account</p>
-                  <p className="text-sm text-red-500">
-                    Permanently delete your account and all data
+                  <p className="font-semibold text-red-400">Delete Account</p>
+                  <p className="text-sm text-red-400/60 mt-0.5">
+                    Permanently delete your account and all data. This cannot be
+                    undone.
                   </p>
                 </div>
-
-                <button className="px-4 cursor-pointer py-2 text-sm font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
+                <button
+                  className="
+                    flex-shrink-0 px-4 py-2 text-sm font-semibold cursor-pointer
+                    rounded-lg border border-red-500/30
+                    bg-red-500/10 text-red-400
+                    hover:bg-red-500/20 hover:border-red-500/50
+                    transition-all duration-200
+                  "
+                >
                   Delete
                 </button>
               </div>

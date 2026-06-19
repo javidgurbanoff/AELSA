@@ -37,38 +37,48 @@ const colleagues = [
 
 const Colleagues_Info = () => {
   return (
-    <section className="py-20 px-6 bg-[#F5F9FC]">
+    <section className="py-24 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <h1 className="text-center text-[#0A2540] mb-4 text-5xl font-semibold">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-3">
+            The Team
+          </p>
+          <h2 className="text-4xl md:text-5xl font-black text-text">
             Founding Story
-          </h1>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            Meet the people behind our company and discover the experience,
-            ideas, and innovation that help drive our sea technology forward.
+          </h2>
+          <p className="mt-4 text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+            Meet the people behind AELSA — the experience, ideas, and drive
+            pushing marine innovation forward.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {colleagues.map((person) => (
             <div
               key={person.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+              className="
+                group overflow-hidden rounded-2xl
+                border border-white/10
+                bg-surface/40 backdrop-blur-xl
+                hover:border-primary/30 hover:-translate-y-1
+                transition-all duration-300
+              "
             >
-              <img
-                src={person.image}
-                alt={person.name}
-                className="w-full h-72 object-cover"
-              />
+              <div className="relative overflow-hidden aspect-[3/4]">
+                <img
+                  src={person.image}
+                  alt={person.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              </div>
 
               <div className="p-6">
-                <h2 className="text-2xl font-semibold text-[#0A2540]">
-                  {person.name}
-                </h2>
-
-                <p className="mt-2 text-[#38BDF8] font-medium">{person.role}</p>
-
-                <p className="mt-4 text-slate-600 leading-relaxed text-sm">
+                <h3 className="text-xl font-black text-text">{person.name}</h3>
+                <p className="mt-1 text-sm font-semibold text-primary">
+                  {person.role}
+                </p>
+                <p className="mt-3 text-muted text-sm leading-relaxed">
                   {person.bio}
                 </p>
               </div>

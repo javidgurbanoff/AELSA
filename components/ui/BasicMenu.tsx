@@ -89,7 +89,7 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 200px;
-    background-color: #0a2540;
+    background-color: #071120;
     justify-content: center;
     border-radius: 10px;
     transition: 1s;

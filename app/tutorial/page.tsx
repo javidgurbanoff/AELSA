@@ -8,66 +8,100 @@ const tutorials = [
     id: 1,
     title: "Getting Started",
     description:
-      "Learn how to create your account, navigate the dashboard, and begin using the platform effectively.",
+      "Learn how to create your account, navigate the dashboard, and begin using the AELSA platform effectively from day one.",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    tag: "Beginner",
   },
   {
     id: 2,
     title: "Advanced Tips",
     description:
-      "Discover powerful tools and hidden features that help you work faster and smarter.",
+      "Discover powerful tools and features inside the AELSA ecosystem that help your team work faster and extract more from live ocean data.",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    tag: "Advanced",
   },
   {
     id: 3,
     title: "Platform Overview",
     description:
-      "Understand the complete ecosystem of AELSA technologies and how each component works together.",
+      "Understand the complete AELSA technology stack — how autonomous units, the AI engine, and the analytics dashboard work together.",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    tag: "Overview",
   },
 ];
 
 export default function Tutorial() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#F5F9FC]">
+    <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
 
-      <main className="flex-grow pt-28 pb-16 px-4 flex justify-center">
-        <div className="w-full max-w-5xl">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-extrabold text-[#0B1F3A]">
-              Tutorials
+      <main className="flex-grow pt-28 pb-20 px-6">
+        <div className="w-full max-w-5xl mx-auto">
+          {/* Header */}
+          <div className="mb-14">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-3">
+              Learn
+            </p>
+            <h1 className="text-4xl md:text-5xl font-black text-text leading-tight">
+              Platform Tutorials
             </h1>
-            <p className="mt-3 text-gray-600 max-w-xl mx-auto">
-              Learn how to use the AELSA platform through step-by-step video
-              tutorials designed to help you get started quickly.
+            <p className="mt-4 text-muted text-lg max-w-xl">
+              Step-by-step video guides to help you get the most out of AELSA's
+              autonomous marine technology platform.
             </p>
           </div>
 
-          <div className="grid gap-8">
-            {tutorials.map((tutorial) => (
+          {/* Tutorial list */}
+          <div className="flex flex-col gap-6">
+            {tutorials.map((tutorial, index) => (
               <div
                 key={tutorial.id}
-                className="flex flex-col md:flex-row gap-6 bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition"
+                className="
+                  group flex flex-col md:flex-row gap-0
+                  overflow-hidden rounded-2xl
+                  border border-white/10
+                  bg-surface/40 backdrop-blur-xl
+                  hover:border-primary/30
+                  transition-all duration-300
+                "
               >
-                <iframe
-                  className="w-full md:w-1/2 aspect-video rounded-xl"
-                  src={tutorial.videoUrl}
-                  title={tutorial.title}
-                  frameBorder="0"
-                  allowFullScreen
-                />
+                {/* Video */}
+                <div className="relative w-full md:w-1/2 aspect-video">
+                  <iframe
+                    className="w-full h-full"
+                    src={tutorial.videoUrl}
+                    title={tutorial.title}
+                    frameBorder="0"
+                    allowFullScreen
+                  />
+                  {/* Subtle number overlay */}
+                  <div className="absolute top-3 left-3 w-7 h-7 rounded-full bg-background/70 backdrop-blur-md border border-white/10 flex items-center justify-center text-xs font-black text-primary">
+                    {index + 1}
+                  </div>
+                </div>
 
-                <div className="md:w-1/2 flex flex-col justify-center">
-                  <h2 className="text-2xl font-semibold text-[#0B1F3A] mb-3">
+                {/* Content */}
+                <div className="md:w-1/2 flex flex-col justify-center p-8">
+                  {tutorial.tag && (
+                    <span className="inline-block mb-3 text-xs font-semibold uppercase tracking-widest text-primary">
+                      {tutorial.tag}
+                    </span>
+                  )}
+                  <h2 className="text-2xl font-black text-text mb-3">
                     {tutorial.title}
                   </h2>
-
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-muted leading-relaxed text-sm">
                     {tutorial.description}
                   </p>
-
-                  <button className="mt-5 w-fit px-4 py-2 text-sm font-semibold text-white bg-[#0B1F3A] rounded-lg hover:bg-[#12325C] transition">
+                  <button
+                    className="
+                      mt-6 w-fit px-5 py-2.5 text-sm font-semibold cursor-pointer
+                      rounded-xl border border-white/10
+                      bg-surface/60 text-text
+                      hover:border-primary/30 hover:text-primary
+                      transition-all duration-200
+                    "
+                  >
                     Watch Tutorial
                   </button>
                 </div>

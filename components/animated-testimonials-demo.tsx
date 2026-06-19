@@ -1,42 +1,84 @@
+"use client";
+
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 export default function AnimatedTestimonialsDemo() {
   const testimonials = [
     {
       quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+        "AELSA's autonomous marine systems helped us monitor ocean conditions in real time with remarkable accuracy.",
       name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Marine Systems Engineer",
+      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop",
     },
     {
       quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+        "The AI-powered analytics transformed how we process maritime data and make operational decisions.",
       name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Ocean Technology Director",
+      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop",
     },
     {
       quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+        "Reliable, intelligent, and beautifully engineered. AELSA is pushing marine innovation forward.",
       name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Research Lead",
+      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop",
     },
     {
       quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+        "Their autonomous monitoring systems provided insights we simply couldn't obtain before.",
       name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Maritime Operations Manager",
+      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop",
     },
   ];
-  return <AnimatedTestimonials testimonials={testimonials} />;
+
+  return (
+    <section className="relative overflow-hidden bg-white py-32">
+      {/* Glow Effects */}
+      <div className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-primary/10 blur-[140px]" />
+
+      <div className="absolute right-0 top-20 h-[300px] w-[300px] rounded-full bg-accent/10 blur-[120px]" />
+
+      {/* Huge Background Text */}
+      <div
+        className="
+          absolute
+          left-1/2
+          top-1/2
+          -translate-x-1/2
+          -translate-y-1/2
+          text-[180px]
+          font-black
+          text-primary/[0.03]
+          select-none
+          pointer-events-none
+        "
+      >
+        AELSA
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mb-16 text-center">
+          <div className="mb-4 text-primary font-bold tracking-[0.4em]">04</div>
+
+          <p className="text-accent font-semibold tracking-[0.3em] uppercase">
+            Testimonials
+          </p>
+
+          <h2 className="mt-4 text-4xl md:text-5xl font-black text-background">
+            Trusted By Innovators
+          </h2>
+
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-muted">
+            Discover how AELSA helps organizations leverage intelligent marine
+            technology, autonomous systems, and real-time ocean analytics.
+          </p>
+        </div>
+
+        <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+      </div>
+    </section>
+  );
 }

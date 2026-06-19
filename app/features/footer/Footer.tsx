@@ -33,13 +33,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className=" text-gray-300 bg-[#0A2540]">
+    <footer className=" text-gray-300 bg-background">
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8 border-t-1">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Link href="/" className="group">
-                <div className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-[#38BDF8] to-[#0FB9B1] bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
+                <div className="text-3xl font-extrabold tracking-tight bg-[#fff] bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
                   AELSA
                 </div>
               </Link>
