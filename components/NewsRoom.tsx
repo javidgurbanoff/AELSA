@@ -4,22 +4,22 @@ import React from "react";
 
 const photos = [
   {
-    img: "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Runner-up-480x360.jpg?media=1726085813",
+    img: "/images/newsroom/news-1.jpg",
     date: "27 Feb, 2026",
     text: "New contract has been developed by our Company",
   },
   {
-    img: "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Skarmbild-2025-10-15-101603-480x360.png?media=1726085813",
+    img: "/images/newsroom/news-2.jpg",
     date: "31 Mar, 2026",
     text: "Ships have been sailed over past 4 years",
   },
   {
-    img: "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
+    img: "/images/newsroom/news-3.jpg",
     date: "16 Jun, 2026",
     text: "Still waiting for the agreements? Join us now!",
   },
   {
-    img: "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/02/SeaTech_Master_Shot01-lighthouse-480x360.webp?media=1726085813",
+    img: "/images/newsroom/news-4.jpg",
     date: "24 Jul, 2026",
     text: "Will new technologies gather for the next TechnoFest?",
   },

@@ -2,137 +2,75 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
-      setMessage("Email and Password are required.");
+      setMessage("Email and password are required.");
       return;
     }
 
     setPending(true);
     setMessage("");
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage("Login successful!");
-        localStorage.setItem("authToken", data.token);
-        window.location.href = "/";
-      } else {
-        setMessage(data.message || "Invalid email or password.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setMessage("Error during login.");
-    } finally {
+    if (error) {
+      setMessage(error.message);
       setPending(false);
+      return;
     }
+
+    router.push("/");
+    router.refresh();
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
-      {/* Ambient Glow (matches Hero) */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-primary/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-[-120px] right-[-120px] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[160px]" />
       </div>
 
-      {/* Login Card */}
-      <div
-        className="
-          relative z-10
-          w-[420px]
-          rounded-2xl
-
-          border
-          border-white/10
-
-          bg-surface/70
-          backdrop-blur-2xl
-
-          shadow-[0_20px_80px_rgba(14,165,233,0.12)]
-
-          p-8
-        "
-      >
+      <div className="relative z-10 w-[420px] rounded-2xl border border-white/10 bg-surface/70 backdrop-blur-2xl shadow-[0_20px_80px_rgba(14,165,233,0.12)] p-8">
         <h1 className="text-3xl font-black text-text text-center">
           Welcome Back
         </h1>
-
         <p className="text-sm text-muted text-center mt-3">
           Sign in to continue to{" "}
           <span className="text-primary font-semibold">AELSA</span>
         </p>
 
         <form onSubmit={handleLoginSubmit} className="space-y-4 mt-8">
-          {/* EMAIL */}
           <input
             placeholder="Enter your email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="
-              w-full
-              h-12
-              px-4
-              rounded-lg
-
-              bg-background/40
-              text-text
-
-              border
-              border-white/10
-
-              outline-none
-              focus:border-primary/40
-              focus:ring-2
-              focus:ring-primary/10
-            "
+            className="w-full h-12 px-4 rounded-lg bg-background/40 text-text border border-white/10 outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/10"
           />
-
-          {/* PASSWORD */}
           <input
             placeholder="Enter your password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="
-              w-full
-              h-12
-              px-4
-              rounded-lg
-
-              bg-background/40
-              text-text
-
-              border
-              border-white/10
-
-              outline-none
-              focus:border-primary/40
-              focus:ring-2
-              focus:ring-primary/10
-            "
+            className="w-full h-12 px-4 rounded-lg bg-background/40 text-text border border-white/10 outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/10"
           />
 
-          {/* LINKS */}
           <div className="flex justify-between items-center text-sm mt-2">
             <Link
               href="/auth/forgot-password"
@@ -140,7 +78,6 @@ export default function Login() {
             >
               Forgot password?
             </Link>
-
             <Link
               href="/auth/register"
               className="text-muted hover:text-primary transition"
@@ -149,27 +86,14 @@ export default function Login() {
             </Link>
           </div>
 
-          {/* BUTTON */}
           <button
             type="submit"
             disabled={pending}
-            className={`
-              w-full
-              h-12
-              rounded-lg
-              font-semibold
-              transition-all
-              flex
-              items-center
-              justify-center
-              gap-2
-
-              ${
-                pending
-                  ? "bg-muted/30 text-muted cursor-not-allowed"
-                  : "bg-primary text-background hover:brightness-110 hover:shadow-[0_0_40px_rgba(14,165,233,0.35)]"
-              }
-            `}
+            className={`w-full h-12 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
+              pending
+                ? "bg-muted/30 text-muted cursor-not-allowed"
+                : "bg-primary text-background hover:brightness-110 hover:shadow-[0_0_40px_rgba(14,165,233,0.35)]"
+            }`}
           >
             {pending ? (
               <>
@@ -182,12 +106,9 @@ export default function Login() {
           </button>
         </form>
 
-        {/* MESSAGE */}
         {message && (
           <p
-            className={`mt-4 text-center text-sm ${
-              message.includes("successful") ? "text-accent" : "text-red-400"
-            }`}
+            className={`mt-4 text-center text-sm ${message.includes("successful") ? "text-accent" : "text-red-400"}`}
           >
             {message}
           </p>

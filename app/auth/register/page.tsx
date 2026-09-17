@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -9,12 +11,13 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
-      setMessage("Email and Password are required.");
+      setMessage("Email and password are required.");
       return;
     }
 
@@ -23,147 +26,69 @@ export default function Register() {
       return;
     }
 
+    if (password.length < 6) {
+      setMessage("Password must be at least 6 characters.");
+      return;
+    }
+
     setPending(true);
     setMessage("");
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+    const supabase = createClient();
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage("Register successful!");
-        localStorage.setItem("authToken", data.token);
-        window.location.href = "/";
-      } else {
-        setMessage(data.message || "Registration failed.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setMessage("Error during registration.");
-    } finally {
+    if (error) {
+      setMessage(error.message);
       setPending(false);
+      return;
     }
+
+    setMessage("Account created! Check your email to confirm.");
+    setPending(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
-      {/* Ambient Glow (same system as Hero/Login) */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[-120px] left-[-120px] w-[420px] h-[420px] bg-primary/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-[-140px] right-[-140px] w-[520px] h-[520px] bg-accent/10 rounded-full blur-[160px]" />
       </div>
 
-      {/* Card */}
-      <div
-        className="
-          relative z-10
-          w-[440px]
-          rounded-2xl
-
-          border
-          border-white/10
-
-          bg-surface/70
-          backdrop-blur-2xl
-
-          shadow-[0_20px_80px_rgba(14,165,233,0.12)]
-
-          p-8
-        "
-      >
+      <div className="relative z-10 w-[440px] rounded-2xl border border-white/10 bg-surface/70 backdrop-blur-2xl shadow-[0_20px_80px_rgba(14,165,233,0.12)] p-8">
         <h1 className="text-3xl font-black text-text text-center">
           Create Account
         </h1>
-
         <p className="text-sm text-muted text-center mt-3">
           Sign up to start using{" "}
           <span className="text-primary font-semibold">AELSA</span>
         </p>
 
         <form onSubmit={handleRegisterSubmit} className="space-y-4 mt-8">
-          {/* EMAIL */}
           <input
             placeholder="Enter your email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="
-              w-full
-              h-12
-              px-4
-              rounded-lg
-
-              bg-background/40
-              text-text
-
-              border
-              border-white/10
-
-              outline-none
-              focus:border-primary/40
-              focus:ring-2
-              focus:ring-primary/10
-            "
+            className="w-full h-12 px-4 rounded-lg bg-background/40 text-text border border-white/10 outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/10"
           />
-
-          {/* PASSWORD */}
           <input
             placeholder="Create a password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="
-              w-full
-              h-12
-              px-4
-              rounded-lg
-
-              bg-background/40
-              text-text
-
-              border
-              border-white/10
-
-              outline-none
-              focus:border-primary/40
-              focus:ring-2
-              focus:ring-primary/10
-            "
+            className="w-full h-12 px-4 rounded-lg bg-background/40 text-text border border-white/10 outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/10"
           />
-
-          {/* CONFIRM PASSWORD */}
           <input
             placeholder="Confirm password"
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="
-              w-full
-              h-12
-              px-4
-              rounded-lg
-
-              bg-background/40
-              text-text
-
-              border
-              border-white/10
-
-              outline-none
-              focus:border-primary/40
-              focus:ring-2
-              focus:ring-primary/10
-            "
+            className="w-full h-12 px-4 rounded-lg bg-background/40 text-text border border-white/10 outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/10"
           />
 
-          {/* LINK */}
           <div className="flex justify-between items-center text-sm mt-2">
             <Link
               href="/auth/login"
@@ -173,27 +98,14 @@ export default function Register() {
             </Link>
           </div>
 
-          {/* BUTTON */}
           <button
             type="submit"
             disabled={pending}
-            className={`
-              w-full
-              h-12
-              rounded-lg
-              font-semibold
-              transition-all
-              flex
-              items-center
-              justify-center
-              gap-2
-
-              ${
-                pending
-                  ? "bg-muted/30 text-muted cursor-not-allowed"
-                  : "bg-primary text-background hover:brightness-110 hover:shadow-[0_0_40px_rgba(14,165,233,0.35)]"
-              }
-            `}
+            className={`w-full h-12 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
+              pending
+                ? "bg-muted/30 text-muted cursor-not-allowed"
+                : "bg-primary text-background hover:brightness-110 hover:shadow-[0_0_40px_rgba(14,165,233,0.35)]"
+            }`}
           >
             {pending ? (
               <>
@@ -206,12 +118,9 @@ export default function Register() {
           </button>
         </form>
 
-        {/* MESSAGE */}
         {message && (
           <p
-            className={`mt-4 text-center text-sm ${
-              message.includes("successful") ? "text-accent" : "text-red-400"
-            }`}
+            className={`mt-4 text-center text-sm ${message.includes("created") ? "text-accent" : "text-red-400"}`}
           >
             {message}
           </p>

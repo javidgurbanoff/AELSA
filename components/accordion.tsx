@@ -120,9 +120,13 @@ function FAQs() {
 
         <div className="mt-14 text-center">
           <p className="text-muted text-base">Still have questions?</p>
-          href="/contact" className="mt-2 inline-flex items-center gap-2
-          text-primary font-semibold hover:opacity-70 transition-opacity
-          duration-200" Contact our team <span>{"→"}</span>
+
+          <a
+            href="/contact"
+            className="mt-2 inline-flex items-center gap-2 text-primary font-semibold hover:opacity-70 transition-opacity duration-200"
+          >
+            Contact our team <span>→</span>
+          </a>
         </div>
       </div>
     </section>
