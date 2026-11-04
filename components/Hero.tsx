@@ -46,7 +46,7 @@ export default function Hero() {
             </Link>
 
             <Link
-              href="/what-we-do"
+              href="/about"
               className="rounded-full border border-white/10 bg-surface/60 px-8 py-4 text-text backdrop-blur-xl transition-all duration-300 hover:bg-surface"
             >
               Explore Platform

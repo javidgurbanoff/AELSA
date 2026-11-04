@@ -74,15 +74,15 @@ export default function TimelineDemo() {
           </p>
           <div className="grid grid-cols-2 gap-4">
             {[
-              "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
-              "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Skarmbild-2025-10-15-101603-480x360.png?media=1726085813",
-              "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Runner-up-480x360.jpg?media=1726085813",
-              "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
+              "/images/research&dev/ai&rdp-1.jpg",
+              "/images/research&dev/ai&rdp-2.jpg",
+              "/images/research&dev/ai&rdp-3.jpg",
+              "/images/research&dev/ai&rdp-4.jpg",
             ].map((src, i) => (
               <img
                 key={i}
                 src={src}
-                alt={`AELSA R&D ${i + 1}`}
+                alt={`AELSA deployment ${i + 1}`}
                 className="h-20 md:h-44 lg:h-60 w-full rounded-2xl object-cover border border-white/10"
               />
             ))}
@@ -123,8 +123,8 @@ export default function TimelineDemo() {
           </ul>
           <div className="grid grid-cols-2 gap-4">
             {[
-              "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Skarmbild-2025-10-15-101603-480x360.png?media=1726085813",
-              "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
+              "/images/team-founder/aelsa-foundation-1.jpg",
+              "/images/team-founder/aelsa-foundation-2.jpg",
             ].map((src, i) => (
               <img
                 key={i}

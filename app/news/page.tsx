@@ -11,8 +11,14 @@ type Article = {
   date: string;
   readTime: string;
   author: string;
-  authorImage?: string;
-  tag?: string;
+  tag: string;
+  category:
+    | "Deployment"
+    | "AI"
+    | "Partnership"
+    | "Data"
+    | "Award"
+    | "Infrastructure";
 };
 
 const articles: Article[] = [
@@ -22,11 +28,12 @@ const articles: Article[] = [
     description:
       "AELSA deployed 4 new surface units across the Arctic shelf this quarter, delivering live bioacoustic and temperature data where no infrastructure existed before.",
     image:
-      "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Runner-up-480x360.jpg?media=1726085813",
+      "https://images.unsplash.com/photo-1517783999520-f068d7431a60?w=800&auto=format&fit=crop",
     date: "Mar 17, 2026",
     readTime: "6 min read",
     author: "AELSA Research Team",
     tag: "Deployment",
+    category: "Deployment",
   },
   {
     id: 2,
@@ -34,11 +41,12 @@ const articles: Article[] = [
     description:
       "Six months of open-water testing confirmed our sea state prediction model reaches 98% accuracy at the 72-hour horizon — exceeding all benchmark targets.",
     image:
-      "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Skarmbild-2025-10-15-101603-480x360.png?media=1726085813",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop",
     date: "Feb 28, 2026",
     readTime: "8 min read",
     author: "AELSA Engineering",
     tag: "AI",
+    category: "AI",
   },
   {
     id: 3,
@@ -46,11 +54,12 @@ const articles: Article[] = [
     description:
       "A new integration agreement with Meyer Werft embeds AELSA sensor suites into next-generation cruise vessels, adding 12 active data nodes to our global network.",
     image:
-      "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
+      "https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=800&auto=format&fit=crop",
     date: "Jan 14, 2026",
     readTime: "5 min read",
     author: "AELSA Partnerships",
     tag: "Partnership",
+    category: "Partnership",
   },
   {
     id: 4,
@@ -58,11 +67,12 @@ const articles: Article[] = [
     description:
       "Every 24 hours, AELSA processes over 1.6 million individual readings. Here's how we handle that volume and what the data is already revealing about shifting ocean patterns.",
     image:
-      "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Runner-up-480x360.jpg?media=1726085813",
+      "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=800&auto=format&fit=crop",
     date: "Dec 3, 2025",
     readTime: "10 min read",
     author: "AELSA Data Science",
     tag: "Data",
+    category: "Data",
   },
   {
     id: 5,
@@ -70,11 +80,12 @@ const articles: Article[] = [
     description:
       "AELSA was recognised as runner-up in the Autonomous Systems category at this year's Global Marine Innovation Awards, competing against 140 entries from 38 countries.",
     image:
-      "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/10/Skarmbild-2025-10-15-101603-480x360.png?media=1726085813",
+      "https://images.unsplash.com/photo-1559825481-12a05cc00344?w=800&auto=format&fit=crop",
     date: "Nov 19, 2025",
     readTime: "4 min read",
     author: "AELSA Communications",
     tag: "Award",
+    category: "Award",
   },
   {
     id: 6,
@@ -82,20 +93,81 @@ const articles: Article[] = [
     description:
       "Hardware redundancy, edge computing, and a satellite-first comms architecture — the engineering decisions behind AELSA's reliability record explained.",
     image:
-      "https://usercontent.one/wp/www.seatech.se/wp-content/uploads/2025/09/MEYER_STFT_2s-480x360.jpg?media=1726085813",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&auto=format&fit=crop",
     date: "Oct 7, 2025",
     readTime: "12 min read",
     author: "AELSA Engineering",
     tag: "Infrastructure",
+    category: "Infrastructure",
   },
 ];
+
+const categories = [
+  "All",
+  "Deployment",
+  "AI",
+  "Partnership",
+  "Data",
+  "Award",
+  "Infrastructure",
+] as const;
+type Category = (typeof categories)[number];
+
+const tagColors: Record<string, string> = {
+  Deployment: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  AI: "bg-primary/10 text-primary border-primary/20",
+  Partnership: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  Data: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+  Award: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
+  Infrastructure: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+};
 
 const INITIAL_COUNT = 3;
 
 export default function News() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
-  const visibleArticles = articles.slice(0, visibleCount);
-  const hasMore = visibleCount < articles.length;
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterMsg, setNewsletterMsg] = useState("");
+  const [newsletterPending, setNewsletterPending] = useState(false);
+
+  const filtered =
+    activeCategory === "All"
+      ? articles
+      : articles.filter((a) => a.category === activeCategory);
+
+  const visibleArticles = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  const handleCategoryChange = (cat: Category) => {
+    setActiveCategory(cat);
+    setVisibleCount(INITIAL_COUNT);
+  };
+
+  const handleSubscribe = async () => {
+    if (!newsletterEmail.includes("@")) {
+      setNewsletterMsg("Please enter a valid email.");
+      return;
+    }
+    setNewsletterPending(true);
+    setNewsletterMsg("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+      const data = await res.json();
+      setNewsletterMsg(data.message);
+      if (res.ok) setNewsletterEmail("");
+    } catch {
+      setNewsletterMsg("Something went wrong. Please try again.");
+    } finally {
+      setNewsletterPending(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -103,7 +175,7 @@ export default function News() {
 
       <div className="pt-28 pb-20 px-6 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-10">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-3">
             Latest News
           </p>
@@ -118,24 +190,51 @@ export default function News() {
           </p>
         </div>
 
+        {/* Category filter */}
+        <div className="flex gap-2 flex-wrap mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => handleCategoryChange(cat)}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest border transition-all duration-200 cursor-pointer ${
+                activeCategory === cat
+                  ? "bg-primary text-background border-primary"
+                  : "bg-surface/40 text-muted border-white/10 hover:border-primary/30 hover:text-primary"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+          <span className="ml-auto text-xs text-muted self-center">
+            {filtered.length} article{filtered.length !== 1 ? "s" : ""}
+          </span>
+        </div>
+
         {/* Featured first article */}
         {visibleArticles[0] && (
-          <div className="mb-8 group relative overflow-hidden rounded-2xl border border-white/10 bg-surface/40 backdrop-blur-xl cursor-pointer hover:border-primary/30 transition-all duration-300">
+          <div
+            className="mb-8 group relative overflow-hidden rounded-2xl border border-white/10 bg-surface/40 backdrop-blur-xl cursor-pointer hover:border-primary/30 transition-all duration-500"
+            onMouseEnter={() => setHoveredId(visibleArticles[0].id)}
+            onMouseLeave={() => setHoveredId(null)}
+          >
             <div className="grid md:grid-cols-2 gap-0">
-              <div className="relative overflow-hidden aspect-[16/9] md:aspect-auto">
+              <div className="relative overflow-hidden aspect-[16/9] md:aspect-auto min-h-[280px]">
                 <img
                   src={visibleArticles[0].image}
                   alt={visibleArticles[0].title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/30" />
+                <span
+                  className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest border ${tagColors[visibleArticles[0].tag]}`}
+                >
+                  {visibleArticles[0].tag}
+                </span>
               </div>
-              <div className="p-8 flex flex-col justify-center">
-                {visibleArticles[0].tag && (
-                  <span className="inline-block mb-3 text-xs font-semibold uppercase tracking-widest text-primary">
-                    {visibleArticles[0].tag}
-                  </span>
-                )}
+              <div className="p-8 md:p-10 flex flex-col justify-center">
+                <span className="text-xs text-muted mb-3">
+                  {visibleArticles[0].date} · {visibleArticles[0].readTime}
+                </span>
                 <h2 className="text-2xl md:text-3xl font-black text-text leading-tight">
                   {visibleArticles[0].title}
                 </h2>
@@ -143,78 +242,78 @@ export default function News() {
                   {visibleArticles[0].description}
                 </p>
                 <div className="flex items-center mt-6 gap-3">
-                  <div className="w-7 h-7 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-xs font-bold text-primary">
+                  <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-xs font-black text-primary">
                     {visibleArticles[0].author[0]}
                   </div>
-                  <span className="text-sm text-muted">
+                  <p className="text-sm font-semibold text-text">
                     {visibleArticles[0].author}
-                  </span>
-                  <span className="text-white/20">·</span>
-                  <span className="text-sm text-muted">
-                    {visibleArticles[0].date}
-                  </span>
-                  <span className="text-white/20">·</span>
-                  <span className="text-sm text-muted">
-                    {visibleArticles[0].readTime}
-                  </span>
+                  </p>
                 </div>
+                <button className="mt-6 w-fit px-5 py-2.5 rounded-xl text-sm font-semibold border border-white/10 bg-surface/60 text-text hover:border-primary/30 hover:text-primary transition-all duration-200">
+                  Read Full Story →
+                </button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Grid for remaining articles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visibleArticles.slice(1).map((article) => (
-            <div
-              key={article.id}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-surface/40 backdrop-blur-xl cursor-pointer hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* Image */}
-              <div className="relative overflow-hidden aspect-[16/9]">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                {article.tag && (
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-background/70 backdrop-blur-md border border-white/10 text-primary">
+        {/* Grid */}
+        {filtered.length === 0 ? (
+          <div className="text-center py-20 text-muted">
+            No articles in this category yet.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {visibleArticles.slice(1).map((article) => (
+              <div
+                key={article.id}
+                onMouseEnter={() => setHoveredId(article.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-surface/40 backdrop-blur-xl cursor-pointer hover:border-primary/30 hover:-translate-y-1.5 transition-all duration-300"
+              >
+                <div className="relative overflow-hidden aspect-[16/9]">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <span
+                    className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest border ${tagColors[article.tag]}`}
+                  >
                     {article.tag}
                   </span>
-                )}
-              </div>
-
-              {/* Body */}
-              <div className="p-5">
-                <p className="text-xs text-muted mb-2">
-                  {article.date} · {article.readTime}
-                </p>
-                <h2 className="text-base font-black text-text leading-snug line-clamp-2">
-                  {article.title}
-                </h2>
-                <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-2">
-                  {article.description}
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center mt-4 gap-2">
-                  {article.authorImage ? (
-                    <img
-                      src={article.authorImage}
-                      alt={article.author}
-                      className="w-6 h-6 rounded-full object-cover border border-white/10"
-                    />
-                  ) : (
-                    <div className="w-6 h-6 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] font-bold text-primary">
-                      {article.author[0]}
+                </div>
+                <div className="p-5">
+                  <p className="text-xs text-muted mb-2">
+                    {article.date} · {article.readTime}
+                  </p>
+                  <h2 className="text-base font-black text-text leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-200">
+                    {article.title}
+                  </h2>
+                  <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-2">
+                    {article.description}
+                  </p>
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-[10px] font-bold text-primary">
+                        {article.author[0]}
+                      </div>
+                      <span className="text-xs text-muted">
+                        {article.author}
+                      </span>
                     </div>
-                  )}
-                  <span className="text-xs text-muted">{article.author}</span>
+                    <span
+                      className={`text-xs transition-all duration-200 ${hoveredId === article.id ? "text-primary translate-x-1" : "text-muted"}`}
+                    >
+                      Read →
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Load more */}
         {hasMore && (
@@ -227,6 +326,55 @@ export default function News() {
             </button>
           </div>
         )}
+
+        {/* Newsletter CTA */}
+        <div className="mt-20 rounded-2xl border border-white/10 bg-surface/40 backdrop-blur-xl p-8 md:p-12 text-center relative overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-primary/5 blur-[80px] pointer-events-none" />
+          <div className="relative z-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-3">
+              Stay Updated
+            </p>
+            <h2 className="text-2xl md:text-3xl font-black text-text mb-3">
+              Get AELSA updates in your inbox
+            </h2>
+            <p className="text-muted mb-8 max-w-md mx-auto">
+              Monthly roundups of our latest deployments, research findings, and
+              technology releases.
+            </p>
+            <div className="flex gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
+                className="flex-1 h-12 px-4 rounded-xl bg-background/40 text-text border border-white/10 outline-none focus:border-primary/40 text-sm"
+              />
+              <button
+                onClick={handleSubscribe}
+                disabled={newsletterPending}
+                className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 whitespace-nowrap cursor-pointer ${
+                  newsletterPending
+                    ? "bg-muted/30 text-muted cursor-not-allowed"
+                    : "bg-primary text-background hover:brightness-110 hover:shadow-[0_0_30px_rgba(14,165,233,0.35)]"
+                }`}
+              >
+                {newsletterPending ? "Sending..." : "Subscribe"}
+              </button>
+            </div>
+            {newsletterMsg && (
+              <p
+                className={`mt-4 text-sm ${
+                  newsletterMsg.includes("success")
+                    ? "text-accent"
+                    : "text-red-400"
+                }`}
+              >
+                {newsletterMsg}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

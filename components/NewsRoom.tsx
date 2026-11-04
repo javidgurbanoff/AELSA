@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import React from "react";
 
 const photos = [
@@ -111,7 +111,7 @@ const NewsRoom = () => {
                   cursor-pointer
                 "
               >
-                Read Full Story
+                <Link href="/about">Read Full Story</Link>
               </button>
             </div>
           </div>
@@ -175,7 +175,7 @@ const NewsRoom = () => {
                     group-hover:translate-x-2
                   "
                 >
-                  Read More →
+                  <Link href="/about">Read More → </Link>
                 </button>
               </div>
             </article>
